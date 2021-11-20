@@ -3,17 +3,20 @@ const User=require('../models/user');
 const LocalStrategy=require('passport-local').Strategy;
 
 passport.use(new LocalStrategy({
-    usernameField:'email'
+    usernameField:'email',
+    passReqToCallback : true   
   },
-   function(email,password,done){
+   function(req,email,password,done){
     
     User.findOne({email:email},function(err,user){
         if(err){
-            console.log('error in finding passport');
+            
+            req.flash('error',err);
             return done(err);
         }
         if(!user || user.password!=password){
-            console.log('Invalid username password');
+          console.log('error in password');
+            req.flash('error','Invalid Username/password');
             return done(null,false);
         }
 
@@ -23,14 +26,16 @@ passport.use(new LocalStrategy({
 ));
 
 passport.serializeUser(function(user,done){
+    
     done(null,user.id);
 });
 
 passport.deserializeUser(function(id,done){
+
     User.findById(id,function(err,user){
 
         if(err){
-            console.log('error');
+            
             return done(err);
         }
         return done(null,user);

@@ -3,8 +3,14 @@ const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
 const passport=require('passport');
 const session=require('express-session');
+
+//authentication Stretegy
 const passportLocal=require('./config/passport-local-strategy');
+const passportJWT=require('./config/passport-jwt-strategy');
+
 const MongoStore=require('connect-mongo');
+const flash=require('connect-flash');
+const customMWare=require('./config/middleware');
 const port=8000;
 
 const app=express();
@@ -27,7 +33,11 @@ app.use(express.urlencoded());
 
 //static file
 app.use(express.static('./assets'));
+//make the upload part available to browser
+app.use('/uploads',express.static(__dirname + '/uploads'));
 
+// use express layout
+app.use(expressLayouts);
 //extract styles and scripts from sub pages to layouts
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
@@ -56,6 +66,8 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
+app.use(flash());
+app.use(customMWare.setFlash);
 //use express router
 app.use('/',require('./router'));
 

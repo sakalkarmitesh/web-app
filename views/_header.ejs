@@ -1,11 +1,11 @@
 <header id="body-header">
-    <h3>header</h3>
+    <h3><a href="/" >Connecti</a></h3>
 
     <ul class="user">
         <% if(locals.user) {%>
             
             <li>
-                <a href="/users/profile"><%=user.name %></a>
+                <a href="/users/profile/<%=user.id%>"><%=user.name %></a>
             </li>
             <li>
                 <a href="/users/sign-out">sign out</a>

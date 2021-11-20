@@ -5,10 +5,18 @@ const postSchema=new mongoose.Schema({
         type:String,
         required : true
     },
-    User:{
+    user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
-    }
+        ref:'User',
+    },
+    
+     comments:[
+         {
+             type:mongoose.Schema.Types.ObjectId,
+             ref:'Comment'
+         }
+     ]
+    
 },{
     timestamps:true
 });

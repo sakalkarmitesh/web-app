@@ -1,15 +1,24 @@
 #body-header {
   display: flex;
   justify-content: space-between;
-  background-color: darkslateblue; }
-  #body-header h3 {
+  background-color: black; }
+  #body-header h3 a {
     color: whitesmoke;
     font-size: 2rem;
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: 20px;
-    font-family: monospace; }
+    font-family: monospace;
+    text-decoration: none; }
   #body-header .user {
     display: inline-block; }
     #body-header .user li {
-      display: inline-block; }
+      display: inline-block;
+      margin-top: 6px; }
+    #body-header .user a {
+      color: whitesmoke;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border: 1px solid darkseagreen;
+      border-radius: 20px;
+      padding: 10px; }

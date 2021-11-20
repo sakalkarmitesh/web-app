@@ -1,3 +1,49 @@
+<link rel="stylesheet" href="/css/home.css">
 
-    <h1> Home page </h1>
- 
+<div id="main-section">
+
+    <section id="feed-posts">
+        <h1> Home page </h1>
+        <h3>Post</h3>
+
+
+        <% if(locals.user) {%>
+            <div id="post-form">
+                <div id="welcome-user">Welcome, <%= user.name %>!</div>
+                <form action="/post/create" id="new-post-form" method="Post">
+                    <textarea id="post-content" name="content" cols="30" rows="3"
+                        placeholder="What's on your mind?"></textarea>
+                    <br>
+                    <!-- <input type="submit" value="Post"> -->
+                    <button type="submit">Post</button>
+                </form>
+            </div>
+            <%}%>
+
+
+                <div id="posts-list-container">
+                    <ul>
+                        <% for(post of posts) { %>
+
+                            <%-include('_post');-%>
+
+                                <% } %>
+                    </ul>
+                </div>
+
+    </section>
+
+    <section id="user-friends">
+        <h4>Friends</h4>
+        <div id="user-friends-header">Your Friends</div>
+        <% for(u of all_users) {%>
+
+            <div class="user-friends-list"> <a href="/users/profile/<%=u.id%>">
+                    <%=u.name%>
+                </a>
+            </div>
+            <%}%>
+    </section>
+
+</div>
+<script src="/js/home_post.js"></script>
